@@ -1,12 +1,6 @@
 package com.novatec.servicesimulator.pages;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
+import com.novatec.servicesimulator.services.CallUrl;
 import com.novatec.servicesimulator.services.RestService;
 import com.novatec.servicesimulator.services.SoapService;
 import com.vaadin.navigator.View;
@@ -51,21 +45,7 @@ public class PageMain extends CustomComponent implements View {
         });
         
         buttonUpdate.addClickListener(e -> {
-            URL url = null;
-            try {
-                url = new URL("http://localhost:9898/__admin/mappings/reset");
-            } catch (MalformedURLException e1) {
-                e1.printStackTrace();
-            }
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
-                for (String line; (line = reader.readLine()) != null;) {
-                    System.out.println(line);
-                }
-            } catch (UnsupportedEncodingException e1) {
-                e1.printStackTrace();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+            CallUrl.callPostUrl("http://localhost:9898/__admin/mappings/reset");
         });
         
     
